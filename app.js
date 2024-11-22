@@ -65,15 +65,13 @@ function processTable(cityData, weatherData) {
   const temperatureUnit = weatherData.current_units.temperature_2m
   const tbody = document.createElement('tbody');
 
-  tbody.innerHTML += buildTr('Country', cityData.country);
-  tbody.innerHTML += buildTr('Timezone', cityData.timezone);
-  tbody.innerHTML += buildTr('Population', cityData.population.toLocaleString());
-  tbody.innerHTML += buildTr(
-    'Tomorrow\'s Forecast',
- `
-        <p>Min: ${tomorrowTemperatureMin} ${temperatureUnit}</p>
-        <p>Max: ${tomorrowTemperatureMax} ${temperatureUnit}</p>
-        `
+  tbody.appendChild(buildTr('Country', cityData.country));
+  tbody.appendChild(buildTr('Timezone', cityData.timezone));
+  tbody.appendChild(buildTr('Population', cityData.population.toLocaleString()));
+  tbody.appendChild(
+    buildTr(
+      'Tomorrow\'s Forecast',
+      `Min: ${tomorrowTemperatureMin} ${temperatureUnit}<br>Max: ${tomorrowTemperatureMax} ${temperatureUnit}`)
   );
 
   const finalTable = document.querySelector('#final-table');
@@ -84,12 +82,22 @@ function processTable(cityData, weatherData) {
 }
 
 function buildTr(title, context) {
-  return `
-    <tr>
-      <td class="strong">${title}</td>
-      <td>${context}</td>
-    </tr>
-  `
+  const tr = document.createElement('tr');
+  const fragment = document.createDocumentFragment();
+
+  const titleTd = document.createElement('td');
+  titleTd.className = 'strong';
+  titleTd.textContent = title;
+
+  const contextTd = document.createElement('td');
+  contextTd.innerHTML = context;
+
+  fragment.appendChild(titleTd);
+  fragment.appendChild(contextTd);
+
+  tr.appendChild(fragment)
+
+  return tr;
 }
 
 function changeStyle(weatherData) {
