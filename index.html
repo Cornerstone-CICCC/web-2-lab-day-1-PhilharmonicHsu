@@ -4,11 +4,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>City/Weather Search</title>
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <!-- YOUR CODE HERE -->
-  
-  <script src="./app.js"></script>
+<main>
+  <section id="search-bar">
+    <label>
+      <input id="input-city" type="text" placeholder="Enter city name..." />
+    </label>
+    <button id="search">Search</button>
+  </section>
+  <section id="return-data" class="hidden">
+    <div id="base-info" class="strong">
+      <div class="city-name"></div>
+      <div class="temperature"></div>
+    </div>
+    <section class="table">
+      <table id="final-table">
+        <tbody></tbody>
+      </table>
+    </section>
+  </section>
+  <div id="loading" class="hidden">
+    <div class="loader"></div>
+  </div>
+</main>
+<script src="./app.js"></script>
 </body>
 </html>
